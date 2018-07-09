@@ -13,10 +13,13 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.conf.global_settings import AUTH_USER_MODEL
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT_DIR = os.path.dirname(BASE_DIR)
 STATIC_DIRS = os.path.join(BASE_DIR, 'static')
 TEMPLATES_DIRS = os.path.join(BASE_DIR, 'templates')
+MEDIA_DIRS = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -33,10 +36,13 @@ ALLOWED_HOSTS = [
     '.amazonaws.com',
 ]
 
+AUTH_USER_MODEL = 'members.User'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'members',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,3 +136,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(ROOT_DIR, '.static')
+
+MEDIAFILES_DIRS = [
+    MEDIA_DIRS,
+]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(ROOT_DIR, '.media')
