@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-
+import json
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -17,18 +17,18 @@ from django.conf.global_settings import AUTH_USER_MODEL
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ROOT_DIR = os.path.dirname(BASE_DIR)
+SECRETS_DIR = os.path.join(ROOT_DIR, '.secret')
 STATIC_DIRS = os.path.join(BASE_DIR, 'static')
 TEMPLATES_DIRS = os.path.join(BASE_DIR, 'templates')
 MEDIA_DIRS = os.path.join(BASE_DIR, 'media')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
+# 1. ec2-deploy/.secret/base.json 파일을 읽고
+# 2. 읽어온 결과 str을 파이썬 객체로 변환
+# 3. 변환한 객체는 dict형이므로, 해당 객체에서 ['SECRET_KEY']값을 아래 모듈 변수에 할당
+secret = json.loads(open(os.path.join(SECRETS_DIR, 'base.json')).read())
+SECRET_KEY = secret['SECRET_KEY']
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^j7_g!o05txfec3tk6-ppy#ouyef1gv7$fi54jzb&dknuish=_'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-
+# Auth
 AUTH_USER_MODEL = 'members.User'
 
 # Application definition
