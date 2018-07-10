@@ -8,7 +8,10 @@ DEBUG = True
 INSTALLED_APPS += [
     'storages',
 ]
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+DEFAULT_FILE_STORAGE = 'config.storages.S3DefaultStorage'
+STATICFILES_STORAGE = 'config.storages.S3StaticStorage'
+
 AWS_ACCESS_KEY_ID = secret['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = secret['AWS_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = secret['AWS_STORAGE_BUCKET_NAME']
