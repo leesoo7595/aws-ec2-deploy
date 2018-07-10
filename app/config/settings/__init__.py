@@ -8,4 +8,3 @@
 #
 # settings.production
 #     배포용 설정. Debug메세지 출력
-from .local import *
